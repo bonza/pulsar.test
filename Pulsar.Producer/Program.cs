@@ -63,7 +63,7 @@ class Program
                         Console.WriteLine($"Publishing message with the key {message.Key}");
                         
                         await producer    
-                            .SendAndForgetAsync(message);
+                            .SendAsync(message);
                     }
                     
                     Thread.Sleep(1000);
