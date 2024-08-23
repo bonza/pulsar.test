@@ -60,6 +60,7 @@ class Program
                             .NewMessage(person, key)
                             //.WithOrderingKey(key)
                             ;
+                        Console.WriteLine($"Publishing message with the key {message.Key}");
                         
                         await producer    
                             .SendAndForgetAsync(message);

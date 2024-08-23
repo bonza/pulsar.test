@@ -9,7 +9,7 @@
 
     <ItemGroup>
       <ProjectReference Include="..\Pulsar.Common\Pulsar.Common.csproj"/>
-      <PackageReference Include="Pulsar.Client" Version="3.5.4" />
+      <PackageReference Include="Pulsar.Client" Version="3.6.0" />
     </ItemGroup>
 
 </Project>

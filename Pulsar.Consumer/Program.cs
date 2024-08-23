@@ -39,10 +39,6 @@ class Program
 
             Console.WriteLine($"Starting consumer '{consumer.Name}' with id {consumer.ConsumerId}");
             
-            long msgTotal = 0;
-            long msgCounter = 0;
-            long errCounter = 0;
-            var start = DateTime.Now;
             while (!cancellationToken.IsCancellationRequested)
             {
                 Message<Person> message = null;
@@ -57,10 +53,6 @@ class Program
                 {
                     break;
                 }
-                catch(Exception)
-                {
-                    errCounter++;
-                }
                 finally
                 {
                     if (message != null)
@@ -68,24 +60,7 @@ class Program
                         await consumer.AcknowledgeAsync(message.MessageId);
                     }
                 }
-
-                msgCounter++;
-                msgTotal++;
-
-                var timeSpan = DateTime.Now - start;
-                if (timeSpan.TotalSeconds >= 5)
-                {
-                    Console.WriteLine($"Receiving speed is {msgCounter/5} ms/sec");
-                    start = DateTime.Now;
-                    msgCounter = 0;
-                }
-                else
-                {
-                    // Console.WriteLine(timeSpan.TotalSeconds);
-                }
             }
-
-            Console.WriteLine($"Received {msgTotal} messages, {errCounter} of errors");
 
             // Dispose the consumer
             await consumer.DisposeAsync();
